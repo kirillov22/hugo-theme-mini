@@ -11,13 +11,15 @@
           <div>
             <h1 class="title"><a href='{{ .RelPermalink }}'>{{ $title }}</a></h1>
             <div class ="date">
-                <time datetime="{{ .PublishDate }}">{{ i18n "publishDate" . }}</time>  
+                <time datetime="{{ .PublishDate }}">{{ i18n "publishDate" . }}</time>
             </div>
           </div>
 
-          {{ if ne .Site.Params.hiddenPostSummaryInHomePage true }}
-              <div class="summary">{{ $summary | plainify | htmlUnescape }}</div>
-          {{ end }}
+        {{ if .Description }}
+            <div class="summary">{{ .Description }}</div>
+        {{ else }}
+            <div class="summary">{{ $summary | plainify | htmlUnescape }}</div>
+        {{ end }}
 
         </section>
     {{ end }}
@@ -31,7 +33,7 @@
                   </a>
             </span>
           {{ end }}
-          
+
           {{ if $paginator.HasNext }}
               <span class="next">
                   <a href="{{.Paginator.Next.URL}}">
